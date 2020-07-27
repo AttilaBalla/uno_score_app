@@ -3,6 +3,7 @@ import {Button, Header, Icon, Input, Segment} from "semantic-ui-react";
 import PlayerTableComponent from "./PlayerTableComponent";
 import {gameDataStore} from "../store/GameManager";
 import {actions} from "../store/actions";
+import {validateNameInput} from "../utilities/validation";
 
 const PlayerDataComponent = () => {
 
@@ -13,18 +14,16 @@ const PlayerDataComponent = () => {
     const [counter, setCounter] = useState(gameData.state.players.length);
 
     const addPlayer = () => {
-        dispatch({
-            type: actions.ADD_PLAYER,
-            data: {"id": counter, "name": playerName, "points": []}
-        });
-        setCounter(counter + 1)
-    };
 
-    const removePlayer = () => {
-        dispatch({
-            type: actions.REMOVE_PLAYER,
-            data: {id: 0} // TODO: Implement this
-        });
+        if (validateNameInput(playerName)) {
+            dispatch({
+                type: actions.ADD_PLAYER,
+                data: {"id": counter, "name": playerName, "points": []}
+            });
+            setCounter(counter + 1);
+            setPlayerName("");
+        }
+        // do alert stuff here
     };
 
     const renderPlaceHolderSegment = () => (
@@ -51,6 +50,7 @@ const PlayerDataComponent = () => {
             onChange={(event) => {
                 setPlayerName(event.target.value)
             }}
+            value={playerName}
             label={<Button icon
                            color={"green"}
                            onClick={addPlayer}>

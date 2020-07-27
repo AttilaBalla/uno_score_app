@@ -4,5 +4,5 @@ export const validateIntegerInput = (points) => {
 };
 
 export const validateNameInput = (name) => {
-    return (name.length > 2);
+    return (name.trim().length > 2);
 };

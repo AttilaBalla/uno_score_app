@@ -1,5 +1,5 @@
 import React, {useContext, useState} from 'react';
-import {Button, Grid, Icon, Input, Statistic, Table} from "semantic-ui-react";
+import {Button, Grid, Icon, Input, Message, Statistic, Table} from "semantic-ui-react";
 import {validateIntegerInput} from "../utilities/validation";
 import {gameDataStore} from "../store/GameManager";
 import {actions} from "../store/actions";
@@ -24,6 +24,13 @@ const PlayerTableComponent = ({playerData}) => {
             });
             setCurrentPoints("")
         }
+    };
+
+    const removePlayer = () => {
+        dispatch({
+            type: actions.REMOVE_PLAYER,
+            data: {id: playerData.id}
+        });
     };
 
     return (
@@ -57,6 +64,7 @@ const PlayerTableComponent = ({playerData}) => {
                             </Table.Row>
                         </Table.Body>
                     </Table>
+                    {playerData.points.length === 0 ? <Message visible>points will be shown here...</Message> : null}
                     <Input
                         onChange={(event) => {
                             setCurrentPoints(event.target.value)
@@ -71,6 +79,11 @@ const PlayerTableComponent = ({playerData}) => {
                             <Icon name='add'/>
                         </Button>}
                     />
+                    <div>
+                        <Button icon floated={"right"} onClick={removePlayer}>
+                            <Icon name={"trash"}/>
+                        </Button>
+                    </div>
                 </Grid.Column>
             </Grid.Row>
         </Grid>

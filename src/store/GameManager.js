@@ -20,6 +20,8 @@ const GameManager = ({children}) => {
         switch (action.type) {
             case actions.ADD_PLAYER:
                 return {...state, players: [...state.players, action.data]};
+            case actions.REMOVE_PLAYER:
+                return removePlayer(state, action.data.id);
             case actions.ADD_POINTS:
                 return addPointsToPlayer(state, action.data);
             case actions.UPDATE_MAX_POINTS:
@@ -34,8 +36,16 @@ const GameManager = ({children}) => {
     return <Provider value={{state, dispatch}}>{children}</Provider>;
 };
 
-const addPointsToPlayer = (state, playerData) => {
+const removePlayer = (state, playerId) => {
+    let { players } = state;
+    let filteredPlayersList = players.filter((player, index, array) => {
+       return player.id !== playerId
+    });
 
+    return {...state, players: filteredPlayersList}
+};
+
+const addPointsToPlayer = (state, playerData) => {
     const { id, points } = playerData;
     let { players } = state;
 
