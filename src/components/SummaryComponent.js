@@ -6,10 +6,9 @@ import {gameDataStore} from "../store/GameManager";
 const SummaryComponent = () => {
 
     const gameData = useContext(gameDataStore);
-    console.log(gameData.state.maxPoints);
 
     return (
-        <CardGroup itemsPerRow={2}>
+        <CardGroup itemsPerRow={gameData.state.cardsPerRow}>
             {gameData.state.players.map((playerData, key) => {
                 return (
                     <PlayerCardComponent

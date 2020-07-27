@@ -1,4 +1,4 @@
-export const validatePointsInput = (points) => {
+export const validateIntegerInput = (points) => {
     if (isNaN(points)) return false;
     return parseInt(points) >= 0
 };

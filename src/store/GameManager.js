@@ -22,8 +22,12 @@ const GameManager = ({children}) => {
                 return {...state, players: [...state.players, action.data]};
             case actions.ADD_POINTS:
                 return addPointsToPlayer(state, action.data);
+            case actions.UPDATE_MAX_POINTS:
+                return {...state, maxPoints: action.data.maxPoints};
+            case actions.UPDATE_CARDS_PER_ROW:
+                return {...state, cardsPerRow: action.data.cardsPerRow};
             default:
-                throw new Error();
+                throw new Error("The GameManager doesn't know what to do with this action :( ");
         }
     }, initialState);
 

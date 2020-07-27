@@ -1,6 +1,6 @@
 import React, {useContext, useState} from 'react';
 import {Button, Grid, Icon, Input, Statistic, Table} from "semantic-ui-react";
-import {validatePointsInput} from "../utilities/validation";
+import {validateIntegerInput} from "../utilities/validation";
 import {gameDataStore} from "../store/GameManager";
 import {actions} from "../store/actions";
 
@@ -14,7 +14,7 @@ const PlayerTableComponent = ({playerData}) => {
 
     const addPointsToPlayer = () => {
 
-        if (validatePointsInput(currentPoints)) {
+        if (validateIntegerInput(currentPoints)) {
             dispatch({
                 type: actions.ADD_POINTS,
                 data: {
