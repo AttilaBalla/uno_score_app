@@ -1,7 +1,14 @@
-import {Card, Progress, Statistic} from "semantic-ui-react";
 import React from "react";
+import {Card, Progress, Statistic} from "semantic-ui-react";
+import {convertPercentToColor, round} from "../utilities/progressBarUtils";
 
 const PlayerCardComponent = ({playerData, pointLimit}) => {
+
+    const currentPoints = playerData.points.reduce((a, b) => a + b, 0);
+    const currentPercent = (currentPoints / pointLimit) * 100;
+    let progressColor = convertPercentToColor(currentPercent);
+
+    console.log(round(currentPercent, 4).toString());
 
     return (
         <Card>
@@ -10,10 +17,11 @@ const PlayerCardComponent = ({playerData, pointLimit}) => {
                 <Statistic label='points' value={playerData.points.reduce((a, b) => a + b, 0)}/>
                 <Card.Description>
                     <Progress
-                        indicating
-                        value={playerData.points.reduce((a, b) => a + b, 0)}
+                        color={progressColor}
+                        label={round(currentPercent, 1) + '%'}
+                        value={currentPoints}
                         total={pointLimit}
-                        />
+                    />
                 </Card.Description>
             </Card.Content>
         </Card>
