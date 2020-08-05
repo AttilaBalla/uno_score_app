@@ -12,7 +12,7 @@
     "node-sass": "^4.13.1",
     "prop-types": "latest",
     "semantic-ui-css": "^2.4.1",
-    "semantic-ui-react": "^1.0.0"
+    "semantic-ui-react": "^1.1.1"
   },
   "scripts": {
     "start": "react-scripts start",
