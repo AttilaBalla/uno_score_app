@@ -2,13 +2,13 @@ import React from 'react'
 import {Tab} from 'semantic-ui-react'
 
 import PlayerDataComponent from "./PlayerDataComponent";
-import ConfigurationComponent from "./ConfigurationComponent";
+import SettingsComponent from "./SettingsComponent";
 import SummaryComponent from "./SummaryComponent";
 
 const panes = [
     {menuItem: 'Summary', pane: {content: <SummaryComponent/>}},
     {menuItem: 'Player Data', pane: {content: <PlayerDataComponent/>}},
-    {menuItem: 'Configuration', pane: {content: <ConfigurationComponent/>}},
+    {menuItem: 'Settings', pane: {content: <SettingsComponent/>}},
 ];
 
 const NavigationComponent = () =>

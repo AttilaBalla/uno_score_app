@@ -4,7 +4,7 @@ import {gameDataStore} from "../store/GameManager";
 import {validateIntegerInput} from "../utilities/validation";
 import {actions} from "../store/actions";
 
-const ConfigurationComponent = () => {
+const SettingsComponent = () => {
 
     const gameData = useContext(gameDataStore);
     const {dispatch} = gameData;
@@ -77,15 +77,22 @@ const ConfigurationComponent = () => {
                     </Button>
                 </Input>
             </Segment>
+            <Segment raised color={"orange"}>
+                <p>Clears points for all players. This cannot be undone!</p>
+                <Button icon color="orange" labelPosition='left'>
+                    <Icon name='trash'/>
+                    Clear points
+                </Button>
+            </Segment>
             <Segment raised color={"red"}>
                 <p>Clears all data from the current session. This cannot be undone!</p>
                 <Button icon color="red" labelPosition='left'>
                     <Icon name='trash'/>
-                    Clear data
+                    Clear all data
                 </Button>
             </Segment>
         </React.Fragment>
     )
 };
 
-export default ConfigurationComponent
+export default SettingsComponent
