@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "d53fc40c727bad0bef29df1b4d8966cb",
+    "revision": "3331f7e3d246cb0cb745ffe416208a80",
     "url": "/uno_score_app/index.html"
   },
   {
-    "revision": "43e6a22b083de77dfaa1",
+    "revision": "cb3477450a52732698a7",
     "url": "/uno_score_app/static/css/main.5f361e03.chunk.css"
   },
   {
-    "revision": "a781257b45f710178a10",
-    "url": "/uno_score_app/static/js/2.c6c36d96.chunk.js"
+    "revision": "27080f8e6ffbf8a3e379",
+    "url": "/uno_score_app/static/js/2.ab261daf.chunk.js"
   },
   {
     "revision": "5bd09eb7f2cf4d145d532d862be18942",
-    "url": "/uno_score_app/static/js/2.c6c36d96.chunk.js.LICENSE.txt"
+    "url": "/uno_score_app/static/js/2.ab261daf.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "43e6a22b083de77dfaa1",
-    "url": "/uno_score_app/static/js/main.93a1346b.chunk.js"
+    "revision": "cb3477450a52732698a7",
+    "url": "/uno_score_app/static/js/main.a2081cc1.chunk.js"
   },
   {
     "revision": "2f4ed85eac7d0815b0ac",
