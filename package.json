@@ -12,8 +12,8 @@
     "react-scripts": "3.4.1",
     "node-sass": "^4.13.1",
     "prop-types": "latest",
-    "semantic-ui-css": "^2.4.1",
-    "semantic-ui-react": "^1.1.1"
+    "semantic-ui-css": "latest",
+    "semantic-ui-react": "latest"
   },
   "scripts": {
     "predeploy": "npm run build",

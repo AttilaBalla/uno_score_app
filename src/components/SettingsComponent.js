@@ -1,8 +1,10 @@
 import React, {useContext, useState} from "react";
-import {Button, Header, Icon, Input, Label, Segment} from "semantic-ui-react";
+import {Button, Divider, Header, Icon, Input, Segment} from "semantic-ui-react";
 import {gameDataStore} from "../store/GameManager";
-import {validateIntegerInput} from "../utilities/validation";
+import {validateIntegerInput, validateNameInput} from "../utilities/validation";
 import {actions} from "../store/actions";
+import {messages} from "../utilities/messages";
+import {MessageComponent} from "./MessageComponent";
 
 const SettingsComponent = () => {
 
@@ -12,81 +14,82 @@ const SettingsComponent = () => {
     const {maxPoints, cardsPerRow} = gameData.state;
     const [currentMaxPoints, setCurrentMaxPoints] = useState(maxPoints);
     const [currentCardsPerRow, setCurrentCardsPerRow] = useState(cardsPerRow);
+    const [alertMessage, setAlertMessage] = useState({type: "", text: ""});
 
-    const updateMaxPoints = () => {
-        if (validateIntegerInput(currentMaxPoints)) {
+    const updateSettingsAction = () => {
+        if (validateIntegerInput(currentMaxPoints) && validateIntegerInput(currentCardsPerRow)) {
             dispatch({
-                type: actions.UPDATE_MAX_POINTS,
+                type: actions.UPDATE_SETTINGS,
                 data: {
+                    cardsPerRow: parseInt(currentCardsPerRow),
                     maxPoints: parseInt(currentMaxPoints)
                 }
             });
-            // do alerts here later....
+            setAlertMessage(messages.changesSuccess)
+        } else {
+            setAlertMessage(messages.numberValidationError)
         }
+
+        setTimeout(() => {
+            setAlertMessage({type: "", text: ""})
+        }, 3000)
     };
 
-    const updateCardsPerRow = () => {
-        if (validateIntegerInput(currentMaxPoints)) {
-            dispatch({
-                type: actions.UPDATE_CARDS_PER_ROW,
-                data: {
-                    cardsPerRow: parseInt(currentCardsPerRow)
-                }
-            });
-            // do alerts here later....
-        }
+    const clearPointsAction = () => {
+        dispatch({
+            type: actions.CLEAR_POINTS
+        })
+    };
+
+    const clearDataAction = () => {
+        dispatch({
+            type: actions.CLEAR_DATA
+        })
     };
 
     return (
         <React.Fragment>
             <Header as='h4' attached='top' block>
-                Game Options
+                Settings
             </Header>
+            <MessageComponent type={alertMessage.type} text={alertMessage.text}/>
             <Segment attached>
                 <p>Affects how long the games last.</p>
                 <Input type={"text"}
-                       labelPosition={"right"}
+                       label={"Max Points"}
                        value={currentMaxPoints}
-                       action
                        onChange={(event) => {
                            setCurrentMaxPoints(event.target.value)
                        }}>
-                    <Label>Point Limit</Label>
-                    <input/>
-                    <Button icon color={"green"} onClick={updateMaxPoints}>
-                        <Icon name="check"/>
-                    </Button>
                 </Input>
-            </Segment>
-            <Header as='h4' attached='top' block>
-                Interface Options
-            </Header>
-            <Segment attached>
+                <Divider/>
                 <p>Controls how many cards should be shown in a single row on the summary page.</p>
                 <Input type={"text"}
-                       labelPosition={"right"}
+                       label={"Cards Per Row"}
                        value={currentCardsPerRow}
-                       action
                        onChange={(event) => {
                            setCurrentCardsPerRow(event.target.value)
                        }}>
-                    <Label>Cards per row</Label>
-                    <input/>
-                    <Button icon color={"green"} onClick={updateCardsPerRow}>
-                        <Icon name="check"/>
-                    </Button>
                 </Input>
+                <Divider/>
+                <Button icon
+                        color={"blue"}
+                        labelPosition={"left"}
+                        onClick={updateSettingsAction}>
+                    <Icon name="check"/>
+                    Apply Changes
+                </Button>
             </Segment>
             <Segment raised color={"orange"}>
                 <p>Clears points for all players. This cannot be undone!</p>
-                <Button icon color="orange" labelPosition='left'>
+                <Button icon color="orange" labelPosition='left' onClick={clearPointsAction}>
                     <Icon name='trash'/>
                     Clear points
                 </Button>
             </Segment>
             <Segment raised color={"red"}>
                 <p>Clears all data from the current session. This cannot be undone!</p>
-                <Button icon color="red" labelPosition='left'>
+                <Button icon color="red" labelPosition='left' onClick={clearDataAction}>
                     <Icon name='trash'/>
                     Clear all data
                 </Button>

@@ -4,13 +4,7 @@ import {actions} from "./actions";
 const initialState = {
     maxPoints: 500,
     cardsPerRow: 2,
-    players: [
-        {
-            id: 0,
-            name: "Atti",
-            points: []
-        },
-    ]
+    players: []
 };
 const gameDataStore = createContext(initialState);
 const {Provider} = gameDataStore;
@@ -24,12 +18,14 @@ const GameManager = ({children}) => {
                 return removePlayer(state, action.data.id);
             case actions.ADD_POINTS:
                 return addPointsToPlayer(state, action.data);
-            case actions.UPDATE_MAX_POINTS:
-                return {...state, maxPoints: action.data.maxPoints};
-            case actions.UPDATE_CARDS_PER_ROW:
-                return {...state, cardsPerRow: action.data.cardsPerRow};
+            case actions.UPDATE_SETTINGS:
+                return {...state, cardsPerRow: action.data.cardsPerRow, maxPoints: action.data.maxPoints};
+            case actions.CLEAR_POINTS:
+                return clearPoints(state);
+            case actions.CLEAR_DATA:
+                return clearData(state);
             default:
-                throw new Error("The GameManager doesn't know what to do with this action :( ");
+                throw new Error(`The GameManager doesn't know what to do with this action: ${action.type}`);
         }
     }, initialState);
 
@@ -37,25 +33,39 @@ const GameManager = ({children}) => {
 };
 
 const removePlayer = (state, playerId) => {
-    let { players } = state;
+    let {players} = state;
     let filteredPlayersList = players.filter((player, index, array) => {
-       return player.id !== playerId
+        return player.id !== playerId
     });
 
     return {...state, players: filteredPlayersList}
 };
 
 const addPointsToPlayer = (state, playerData) => {
-    const { id, points } = playerData;
-    let { players } = state;
+    const {id, points} = playerData;
+    let {players} = state;
 
     for (let player of players) {
-        if(player.id === id) {
+        if (player.id === id) {
             player.points = points;
         }
     }
 
     return {...state, players: players};
+};
+
+const clearPoints = (state) => {
+    let {players} = state;
+
+    for (let player of players) {
+        player.points = []
+    }
+
+    return {...state, players: players}
+};
+
+const clearData = (state) => {
+    return initialState
 };
 
 export {gameDataStore, GameManager}
