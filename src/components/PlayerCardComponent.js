@@ -8,8 +8,6 @@ const PlayerCardComponent = ({playerData, pointLimit}) => {
     const currentPercent = (currentPoints / pointLimit) * 100;
     let progressColor = convertPercentToColor(currentPercent);
 
-    console.log(round(currentPercent, 4).toString());
-
     return (
         <Card>
             <Card.Content>

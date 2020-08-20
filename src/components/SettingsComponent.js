@@ -55,22 +55,30 @@ const SettingsComponent = () => {
             <MessageComponent type={alertMessage.type} text={alertMessage.text}/>
             <Segment attached>
                 <p>Affects how long the games last.</p>
-                <Input type={"text"}
-                       label={"Max Points"}
-                       value={currentMaxPoints}
-                       onChange={(event) => {
-                           setCurrentMaxPoints(event.target.value)
-                       }}>
-                </Input>
+                <div className="limited-width">
+                    <Input
+                        fluid
+                        type={"text"}
+                        label={"Max Points"}
+                        value={currentMaxPoints}
+                        onChange={(event) => {
+                            setCurrentMaxPoints(event.target.value)
+                        }}>
+                    </Input>
+                </div>
                 <Divider/>
                 <p>Controls how many cards should be shown in a single row on the summary page.</p>
-                <Input type={"text"}
-                       label={"Cards Per Row"}
-                       value={currentCardsPerRow}
-                       onChange={(event) => {
-                           setCurrentCardsPerRow(event.target.value)
-                       }}>
-                </Input>
+                <div className="limited-width">
+                    <Input
+                        fluid
+                        type={"text"}
+                        label={"Cards Per Row"}
+                        value={currentCardsPerRow}
+                        onChange={(event) => {
+                            setCurrentCardsPerRow(event.target.value)
+                        }}>
+                    </Input>
+                </div>
                 <Divider/>
                 <Button icon
                         color={"blue"}

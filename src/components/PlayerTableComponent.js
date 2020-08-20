@@ -1,8 +1,9 @@
 import React, {useContext, useState} from 'react';
-import {Button, Grid, Icon, Input, Message, Statistic, Table} from "semantic-ui-react";
+import {Button, Grid, Icon, Input, Segment, Statistic} from "semantic-ui-react";
 import {validateIntegerInput} from "../utilities/validation";
 import {gameDataStore} from "../store/GameManager";
 import {actions} from "../store/actions";
+import {PointsComponent} from "./PointsComponent";
 
 
 const PlayerTableComponent = ({playerData}) => {
@@ -34,7 +35,7 @@ const PlayerTableComponent = ({playerData}) => {
     };
 
     return (
-        <Grid celled>
+        <Grid celled stackable>
             <Grid.Row>
                 <Grid.Column width={3}>
                     <h2>{playerData.name}</h2>
@@ -44,46 +45,50 @@ const PlayerTableComponent = ({playerData}) => {
                     </Statistic>
                 </Grid.Column>
                 <Grid.Column width={13}>
-                    <Table celled collapsing textAlign="center">
-                        <Table.Header>
-                            <Table.Row>
-                                {playerData.points.map((value, key) => {
-                                    return (
-                                        <Table.HeaderCell key={key}>{key + 1}</Table.HeaderCell>
-                                    )
-                                })}
-                            </Table.Row>
-                        </Table.Header>
-                        <Table.Body>
-                            <Table.Row>
-                                {playerData.points.map((value, key) => {
-                                    return (
-                                        <Table.HeaderCell key={key}>{value}</Table.HeaderCell>
-                                    )
-                                })}
-                            </Table.Row>
-                        </Table.Body>
-                    </Table>
-                    {playerData.points.length === 0 ? <Message visible>points will be shown here...</Message> : null}
-                    <Input
-                        onChange={(event) => {
-                            setCurrentPoints(event.target.value)
-                        }}
-                        value={currentPoints}
-                        size={"mini"}
-                        placeholder='add points...'
-                        labelPosition='right'
-                        label={<Button icon
-                                       primary
-                                       onClick={addPointsToPlayer}>
-                            <Icon name='add'/>
-                        </Button>}
-                    />
-                    <div>
-                        <Button icon floated={"right"} onClick={removePlayer}>
-                            <Icon name={"trash"}/>
-                        </Button>
-                    </div>
+                    <Grid stackable>
+                        <Grid.Row>
+                            <Grid.Column>
+                                <Segment basic>
+                                    {playerData.points.length === 0 ?
+                                        <span>points will be shown here...</span> : null}
+                                    {playerData.points.map((value, key) => {
+                                        return (
+                                            <PointsComponent key={key} index={key + 1} value={value}/>
+                                        )
+                                    })}
+                                </Segment>
+                            </Grid.Column>
+                        </Grid.Row>
+                        <Grid.Row>
+                            <Grid.Column width={14}>
+                                <Input
+                                    onChange={(event) => {
+                                        setCurrentPoints(event.target.value)
+                                    }}
+                                    value={currentPoints}
+                                    size={"mini"}
+                                    placeholder='add points...'
+                                    labelPosition='right'
+                                    label={<Button icon
+                                                   primary
+                                                   onClick={addPointsToPlayer}>
+                                        <Icon name='add'/>
+                                    </Button>}
+                                />
+                            </Grid.Column>
+                            <Grid.Column width={1}>
+                                <Button icon onClick={removePlayer}>
+                                    <Icon name={"edit"}/>
+                                </Button>
+                            </Grid.Column>
+                            <Grid.Column width={1}>
+                                <Button icon onClick={removePlayer}>
+                                    <Icon name={"trash"}/>
+                                </Button>
+                            </Grid.Column>
+                        </Grid.Row>
+                    </Grid>
+
                 </Grid.Column>
             </Grid.Row>
         </Grid>

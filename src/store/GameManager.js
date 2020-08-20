@@ -4,7 +4,7 @@ import {actions} from "./actions";
 const initialState = {
     maxPoints: 500,
     cardsPerRow: 2,
-    players: []
+    players: [{id: 0, name: "Atti", points: [12, 34, 0, 143]}, {id: 1, name: "Olívia", points: []}]
 };
 const gameDataStore = createContext(initialState);
 const {Provider} = gameDataStore;
