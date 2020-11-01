@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/uno_score_app/static/css/main.f3e22461.chunk.css",
-    "main.js": "/uno_score_app/static/js/main.2784a8f9.chunk.js",
-    "main.js.map": "/uno_score_app/static/js/main.2784a8f9.chunk.js.map",
+    "main.js": "/uno_score_app/static/js/main.3f731ae9.chunk.js",
+    "main.js.map": "/uno_score_app/static/js/main.3f731ae9.chunk.js.map",
     "runtime-main.js": "/uno_score_app/static/js/runtime-main.3d49f045.js",
     "runtime-main.js.map": "/uno_score_app/static/js/runtime-main.3d49f045.js.map",
-    "static/js/2.db583b83.chunk.js": "/uno_score_app/static/js/2.db583b83.chunk.js",
-    "static/js/2.db583b83.chunk.js.map": "/uno_score_app/static/js/2.db583b83.chunk.js.map",
+    "static/js/2.6e7af96a.chunk.js": "/uno_score_app/static/js/2.6e7af96a.chunk.js",
+    "static/js/2.6e7af96a.chunk.js.map": "/uno_score_app/static/js/2.6e7af96a.chunk.js.map",
     "index.html": "/uno_score_app/index.html",
-    "precache-manifest.9360a4c12e495c8c9f7e6b64712c0dca.js": "/uno_score_app/precache-manifest.9360a4c12e495c8c9f7e6b64712c0dca.js",
+    "precache-manifest.86ca5cedca29f0e6800c303f5f2ac5c8.js": "/uno_score_app/precache-manifest.86ca5cedca29f0e6800c303f5f2ac5c8.js",
     "service-worker.js": "/uno_score_app/service-worker.js",
     "static/css/main.f3e22461.chunk.css.map": "/uno_score_app/static/css/main.f3e22461.chunk.css.map",
-    "static/js/2.db583b83.chunk.js.LICENSE.txt": "/uno_score_app/static/js/2.db583b83.chunk.js.LICENSE.txt"
+    "static/js/2.6e7af96a.chunk.js.LICENSE.txt": "/uno_score_app/static/js/2.6e7af96a.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.3d49f045.js",
-    "static/js/2.db583b83.chunk.js",
+    "static/js/2.6e7af96a.chunk.js",
     "static/css/main.f3e22461.chunk.css",
-    "static/js/main.2784a8f9.chunk.js"
+    "static/js/main.3f731ae9.chunk.js"
   ]
 }
