@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {Button, Divider, Header, Icon, Input, Segment} from "semantic-ui-react";
-import {validateIntegerInput, validateNameInput} from "../utilities/validation";
+import {validateIntegerInput} from "../utilities/validation";
 import {actions} from "../store/actions";
 import {messages} from "../utilities/messages";
 import {MessageComponent} from "./MessageComponent";

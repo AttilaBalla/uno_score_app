@@ -1,15 +1,11 @@
 import React, {createContext, useReducer} from 'react';
-import {actions} from "./actions";
-
-const initialState = {
-    maxPoints: 500,
-    cardsPerRow: 2,
-    players: []
-};
+import {actions} from "store/actions";
+import {initialState} from "store/initialState";
 
 const gameDataStore = createContext(initialState);
 const {Provider} = gameDataStore;
 
+// old context API based implementation, it shall stay here as an example
 const GameManager = ({children}) => {
     const [state, dispatch] = useReducer((state, action) => {
         console.log(state);
