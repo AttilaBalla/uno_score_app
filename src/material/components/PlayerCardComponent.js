@@ -11,6 +11,7 @@ import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from '@material-ui/icons/Delete';
 import {actions} from "../../store/actions";
 import TextField from "@material-ui/core/TextField";
+import Tooltip from "@material-ui/core/Tooltip";
 
 const useStyles = makeStyles(() => ({
     container: {
@@ -44,7 +45,8 @@ export const PlayerCardComponent = ({playerData}) => {
 
     const renamePlayer = (newName) => {
         setIsEditingName(false);
-        dispatch({
+
+        if (newName !== null) dispatch({
             type: actions.RENAME_PLAYER,
             data: {id: playerData.id, name: newName}
         });
@@ -65,29 +67,31 @@ export const PlayerCardComponent = ({playerData}) => {
                                 renamePlayer(event.target.value)
                             }}
                         />
-                        : 
-                        <Typography variant={"h4"} className={classes.name} onClick={() => {
-                        setIsEditingName(true);
-                    }}>
-                        {playerData.name}
-                    </Typography>}
-                    <CircularProgressComponent percent={(currentPoints / pointLimit) * 100} points={currentPoints}/>
+                        :
+                        <Tooltip title={<Typography variant={"body2"}>Click to change name</Typography>}>
+                            <Typography variant={"h4"} className={classes.name} onClick={() => {
+                                setIsEditingName(true);
+                            }}>
+                                {playerData.name}
+                            </Typography>
+                        </Tooltip>}
+                        <CircularProgressComponent percent={(currentPoints / pointLimit) * 100} points={currentPoints}/>
                     {playerData.points.map((point, key) => {
                         return (
-                            <PointsChipComponent key={key} points={point}/>
+                        <PointsChipComponent key={key} points={point}/>
                         )
                     })}
-                </div>
-                <div className={classes.deleteButton}>
-                    <IconButton aria-label="delete" className={classes.margin} onClick={removePlayer}>
+                        </div>
+                        <div className={classes.deleteButton}>
+                        <IconButton aria-label="delete" className={classes.margin} onClick={removePlayer}>
                         <DeleteIcon fontSize="small"/>
-                    </IconButton>
-                </div>
-            </Paper>
-        </Grid>
-    );
-};
+                        </IconButton>
+                        </div>
+                        </Paper>
+                        </Grid>
+                        );
+                        };
 
-PlayerCardComponent.propTypes = {
-    playerData: PropTypes.object.isRequired
-}
+                        PlayerCardComponent.propTypes = {
+                        playerData: PropTypes.object.isRequired
+                        }

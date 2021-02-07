@@ -10,6 +10,8 @@ import {makeStyles} from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import DialogActions from "@material-ui/core/DialogActions";
 import {actions} from "store/actions";
+import {Typography} from "@material-ui/core";
+import Tooltip from "@material-ui/core/Tooltip";
 
 const useStyles = makeStyles(() => ({
     gridItem: {
@@ -41,7 +43,7 @@ export const ResultReportComponent = () => {
         if (isFormPristine) {
             setIsFormPristine(false);
         }
-        
+
         if (points !== "") {
             setFormState({
                 ...formState,
@@ -52,13 +54,13 @@ export const ResultReportComponent = () => {
             setFormState({...formState});
         }
     };
-    
+
     const closeModal = () => {
         dispatch({
             type: actions.CLOSE_MODAL
         });
     };
-    
+
     const updateSettingsAndResults = () => {
         if (isFormValid) {
             dispatch({
@@ -68,10 +70,10 @@ export const ResultReportComponent = () => {
                 }
             });
         }
-        
+
         closeModal();
     }
-    
+
     useEffect(() => {
         if (Object.keys(formState).length === gameData.players.length - 1 && selected !== null) {
             setIsFormValid(true);
@@ -103,23 +105,25 @@ export const ResultReportComponent = () => {
                                     handleFormStateChange(playerData.id, event.target.value)
                                 }}
                             />
-                            <ToggleButton
-                                className={classes.winnerSelectButton}
-                                value="check"
-                                selected={selected === playerData.id}
-                                disabled={selected !== playerData.id && selected !== null}
-                                onChange={() => {
-                                    handleWinnerSelect(playerData.id);
-                                }}
-                            >
-                                <StarsIcon/>
-                            </ToggleButton>
+                            <Tooltip title={<Typography variant={"body2"}>Mark as winner</Typography>}>
+                                <ToggleButton
+                                    className={classes.winnerSelectButton}
+                                    value="check"
+                                    selected={selected === playerData.id}
+                                    disabled={selected !== playerData.id && selected !== null}
+                                    onChange={() => {
+                                        handleWinnerSelect(playerData.id);
+                                    }}
+                                >
+                                    <StarsIcon/>
+                                </ToggleButton>
+                            </Tooltip>
                         </Grid>
                     );
                 })}
             </Grid>
             <DialogActions>
-                { isFormValid ? <CheckCircleIcon color={"primary"}/> : <CancelIcon/>}
+                {isFormValid ? <CheckCircleIcon color={"primary"}/> : <CancelIcon/>}
                 <Button onClick={closeModal}>
                     Cancel
                 </Button>
