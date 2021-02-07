@@ -1,17 +1,17 @@
-import React, {useContext, useState} from "react";
+import React, {useState} from "react";
 import {Button, Header, Icon, Input, Segment} from "semantic-ui-react";
 import PlayerTableComponent from "./PlayerTableComponent";
-import {gameDataStore} from "../store/GameManager";
 import {actions} from "../store/actions";
 import {validateNameInput} from "../utilities/validation";
+import {useDispatch, useSelector} from "react-redux";
 
 const PlayerDataComponent = () => {
 
-    const gameData = useContext(gameDataStore);
-    const {dispatch} = gameData;
+    const gameData = useSelector(state => state);
+    const dispatch = useDispatch();
 
     const [playerName, setPlayerName] = useState("");
-    const [counter, setCounter] = useState(gameData.state.players.length);
+    const [counter, setCounter] = useState(gameData.players.length);
 
     const addPlayer = () => {
 
@@ -37,7 +37,7 @@ const PlayerDataComponent = () => {
 
     const renderPlayerComponents = () => {
         return (
-            gameData.state.players.map((playerData, key) => {
+            gameData.players.map((playerData, key) => {
                 return (
                     <PlayerTableComponent key={key} playerData={playerData}/>
                 )
@@ -60,7 +60,7 @@ const PlayerDataComponent = () => {
             placeholder='add player...'
         />
 
-        {gameData.state.players.length > 0 ? renderPlayerComponents() : renderPlaceHolderSegment()}
+        {gameData.players.length > 0 ? renderPlayerComponents() : renderPlaceHolderSegment()}
 
     </React.Fragment>
 };

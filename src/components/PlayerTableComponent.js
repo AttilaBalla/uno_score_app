@@ -1,15 +1,14 @@
-import React, {useContext, useState} from 'react';
+import React, {useState} from 'react';
 import {Button, Grid, Icon, Input, Segment, Statistic} from "semantic-ui-react";
 import {validateIntegerInput} from "../utilities/validation";
-import {gameDataStore} from "../store/GameManager";
 import {actions} from "../store/actions";
 import {PointsComponent} from "./PointsComponent";
+import {useDispatch} from "react-redux";
 
 
 const PlayerTableComponent = ({playerData}) => {
 
-    const gameData = useContext(gameDataStore);
-    const {dispatch} = gameData;
+    const dispatch = useDispatch();
 
     const [currentPoints, setCurrentPoints] = useState("");
 

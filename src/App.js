@@ -1,16 +1,22 @@
 import React from 'react';
-import './App.css';
-import {Container, Header} from "semantic-ui-react";
-import NavigationComponent from "./components/NavigationComponent";
+import {Provider as StoreProvider} from 'react-redux';
+import 'App.css';
+import {Container} from "semantic-ui-react";
+import NavigationComponent from "components/NavigationComponent";
+import configureStore from "store/configureStore";
+
+const store = configureStore();
 
 function App() {
     return (
-        <div className="App">
-            <Container>
-                <Header as='h2'>UNO Score App</Header>
-                <NavigationComponent/>
-            </Container>
-        </div>
+        <StoreProvider store={store}>
+            <div className="App">
+                <Container>
+                    <h2 id={"app-title"}>UNO Score App</h2>
+                    <NavigationComponent/>
+                </Container>
+            </div>
+        </StoreProvider>
     );
 }
 

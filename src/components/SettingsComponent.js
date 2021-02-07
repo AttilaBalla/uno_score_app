@@ -1,17 +1,17 @@
-import React, {useContext, useState} from "react";
+import React, {useState} from "react";
 import {Button, Divider, Header, Icon, Input, Segment} from "semantic-ui-react";
-import {gameDataStore} from "../store/GameManager";
 import {validateIntegerInput, validateNameInput} from "../utilities/validation";
 import {actions} from "../store/actions";
 import {messages} from "../utilities/messages";
 import {MessageComponent} from "./MessageComponent";
+import {useDispatch, useSelector} from "react-redux";
 
 const SettingsComponent = () => {
 
-    const gameData = useContext(gameDataStore);
-    const {dispatch} = gameData;
+    const gameData = useSelector(state => state);
+    const dispatch = useDispatch();
 
-    const {maxPoints, cardsPerRow} = gameData.state;
+    const {maxPoints, cardsPerRow} = gameData;
     const [currentMaxPoints, setCurrentMaxPoints] = useState(maxPoints);
     const [currentCardsPerRow, setCurrentCardsPerRow] = useState(cardsPerRow);
     const [alertMessage, setAlertMessage] = useState({type: "", text: ""});

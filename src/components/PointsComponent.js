@@ -1,7 +1,7 @@
 import React from 'react';
-import {Icon} from "semantic-ui-react";
+import {Icon, Modal} from "semantic-ui-react";
 
-export const PointsComponent = ({index, value}) => {
+const PointsTileComponent = ({index, value}) => {
 
     return (
         <div className={(value === 0) ? "points-item zero" : "points-item"}>
@@ -10,4 +10,14 @@ export const PointsComponent = ({index, value}) => {
         </div>
     )
 
+};
+export const PointsComponent = ({index, value}) => {
+    return (
+        <Modal
+            trigger={<PointsTileComponent index={index} value={value}/>}
+            header='Reminder!'
+            content='Call Benjamin regarding the reports.'
+            actions={['Snooze', {key: 'done', content: 'Done', positive: true}]}
+        />
+    )
 };

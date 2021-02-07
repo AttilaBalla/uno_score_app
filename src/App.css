@@ -1,6 +1,10 @@
 .App {
     text-align: center;
 }
+/* gotta go around semantic UI's rules somehow... */
+#app-title {
+    margin-top: 1em;
+}
 
 .limited-width {
     margin: auto;

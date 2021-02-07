@@ -1,20 +1,20 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import PlayerCardComponent from "./PlayerCardComponent";
 import {CardGroup} from "semantic-ui-react";
-import {gameDataStore} from "../store/GameManager";
+import {useSelector} from "react-redux";
 
 const SummaryComponent = () => {
 
-    const gameData = useContext(gameDataStore);
+    const gameData = useSelector(state => state);
 
     return (
-        <CardGroup itemsPerRow={gameData.state.cardsPerRow}>
-            {gameData.state.players.map((playerData, key) => {
+        <CardGroup itemsPerRow={gameData.cardsPerRow}>
+            {gameData.players.map((playerData, key) => {
                 return (
                     <PlayerCardComponent
                         key={key}
                         playerData={playerData}
-                        pointLimit={gameData.state.maxPoints}
+                        pointLimit={gameData.maxPoints}
                     />
                 )
             })}

@@ -4,13 +4,15 @@ import {actions} from "./actions";
 const initialState = {
     maxPoints: 500,
     cardsPerRow: 2,
-    players: [{id: 0, name: "Atti", points: [12, 34, 0, 143]}, {id: 1, name: "Olívia", points: []}]
+    players: []
 };
+
 const gameDataStore = createContext(initialState);
 const {Provider} = gameDataStore;
 
 const GameManager = ({children}) => {
     const [state, dispatch] = useReducer((state, action) => {
+        console.log(state);
         switch (action.type) {
             case actions.ADD_PLAYER:
                 return {...state, players: [...state.players, action.data]};
@@ -65,7 +67,7 @@ const clearPoints = (state) => {
 };
 
 const clearData = (state) => {
-    return initialState
+    return {...state, players: []}
 };
 
 export {gameDataStore, GameManager}
