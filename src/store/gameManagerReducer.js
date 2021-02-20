@@ -2,26 +2,73 @@ import {actions} from "store/actions";
 
 const initialState = {
     maxPoints: 500,
-    players: [],
+    players: [
+        {
+            id: 0,
+            name: 'Player 1',
+            points: [
+                234,
+                32
+            ]
+        },
+        {
+            id: 1,
+            name: 'Player 2',
+            points: [
+                89,
+                null
+            ]
+        },
+        {
+            id: 2,
+            name: 'New Player',
+            points: [
+                23,
+                45
+            ]
+        },
+        {
+            id: 3,
+            name: 'New Player',
+            points: [
+                67,
+                67
+            ]
+        },
+        {
+            id: 4,
+            name: 'New Player',
+            points: [
+                null,
+                91
+            ]
+        },
+        {
+            id: 5,
+            name: 'New Player',
+            points: [
+                389,
+                12
+            ]
+        }
+    ]
 };
 
 export const gameManagerReducer = (state = initialState, action) => {
     switch (action.type) {
-        case actions.ADD_PLAYER:
+        case actions.player.ADD_PLAYER:
             return {...state, players: [...state.players, action.data]};
-        case actions.REMOVE_PLAYER:
+        case actions.player.REMOVE_PLAYER:
             return removePlayer(state, action.data.id);
-        case actions.ADD_POINTS:
-            return addPointsToPlayer(state, action.data);
-        case actions.UPDATE_POINTS:
+        case actions.player.UPDATE_RESULTS:
             return updatePoints(state, action.data.roundResults);
-        case actions.RENAME_PLAYER:
+        case actions.player.RENAME_PLAYER:
             return renamePlayer(state, action.data);
-        case actions.UPDATE_SETTINGS:
-            return {...state, cardsPerRow: action.data.cardsPerRow, maxPoints: action.data.maxPoints};
-        case actions.CLEAR_POINTS:
+        case actions.settings.UPDATE_MAX_POINTS:
+            return updateMaxPoints(state, action.data);
+        case actions.settings.CLEAR_POINTS:
             return clearPoints(state);
-        case actions.CLEAR_DATA:
+        case actions.settings.CLEAR_DATA:
             return clearData(state);
         default:
             return state;
@@ -48,7 +95,7 @@ const renamePlayer = (state, playerData) => {
     }
 
     return {...state, players: players};
-}
+};
 
 const addPointsToPlayer = (state, playerData) => {
     const {id, points} = playerData;
@@ -64,15 +111,22 @@ const addPointsToPlayer = (state, playerData) => {
 };
 
 const updatePoints = (state, roundResults) => {
-    console.log(roundResults);
     let {players} = state;
-    
+
     for (let player of players) {
-        player.points.push(parseInt(roundResults[player.id]) || null);    
+        player.points.push(parseInt(roundResults[player.id]) || null);
     }
-    
+
     return {...state, players: players};
-}
+};
+
+const updateMaxPoints = (state, newMaxPoints) => {
+    console.log(newMaxPoints);
+    return {
+        ...state,
+            maxPoints: newMaxPoints
+    }
+};
 
 const clearPoints = (state) => {
     let {players} = state;

@@ -5,6 +5,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
 import {ResultReportComponent} from "material/components/modal/ResultReportComponent";
+import {SettingsComponent} from "material/components/modal/SettingsComponent";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -24,7 +25,7 @@ export const DataModalComponent = () => {
             >
                 <DialogTitle id={"alert-dialog-slide-title"}>Game Settings</DialogTitle>
                 <DialogContent>
-                    Settings will be here
+                    <SettingsComponent/>
                 </DialogContent>
                 <DialogTitle id={"alert-dialog-slide-title"}>Add Results</DialogTitle>
                 <DialogContent>

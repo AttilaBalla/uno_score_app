@@ -34,7 +34,7 @@ export const ScoreApp = () => {
 
     const addPlayer = () => {
         dispatch({
-            type: actions.ADD_PLAYER,
+            type: actions.player.ADD_PLAYER,
             data: {"id": counter, "name": "New Player", "points": []}
         });
         setCounter(counter + 1);
@@ -42,7 +42,7 @@ export const ScoreApp = () => {
 
     const openModal = () => {
         dispatch({
-            type: actions.OPEN_MODAL
+            type: actions.ui.OPEN_MODAL
         });
     };
 
@@ -64,7 +64,7 @@ export const ScoreApp = () => {
             </Grid>
             <Box className={classes.fabBox}>
                 <Tooltip title={<Typography variant={"body2"}>Add new player</Typography>} aria-label="add player">
-                    <Fab color="primary"
+                    <Fab color="secondary"
                          aria-label="add"
                          classes={{root: classes.fabButton}}
                          onClick={addPlayer}
@@ -76,7 +76,7 @@ export const ScoreApp = () => {
                 <Tooltip title={<Typography variant={"body2"}>Edit results and settings</Typography>}
                          aria-label="edit data">
                     <span>
-                    <Fab color="secondary"
+                    <Fab color="primary"
                          aria-label="edit"
                          classes={{root: classes.fabButton}}
                          disabled={gameData.players.length < 2}
