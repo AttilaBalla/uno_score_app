@@ -5,7 +5,8 @@ import StarsIcon from '@material-ui/icons/Stars';
 export const PointsChipComponent = ({points}) => {
     return (
         <React.Fragment>
-            {points !== null ? <Chip label={points}/> : <Chip color={"primary"} label={<StarsIcon/>}/>}
+            <Chip label={points !== null ? points : <StarsIcon/>}
+                  color={points !== null ? "secondary" : "primary"}/>
         </React.Fragment>
     );
 };

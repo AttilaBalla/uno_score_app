@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState, useRef} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import TextField from "@material-ui/core/TextField";
 import ToggleButton from "@material-ui/lab/ToggleButton";
@@ -28,11 +28,14 @@ export const ResultReportComponent = () => {
     const classes = useStyles();
     const dispatch = useDispatch();
     const gameData = useSelector(state => state.gameData);
+    const isModalOpen = useSelector(state => state.userInterface.isModalOpen);
 
     const [isFormPristine, setIsFormPristine] = useState(true);
     const [isFormValid, setIsFormValid] = useState(false);
     const [selected, setSelected] = useState(null);
     const [formState, setFormState] = useState({});
+    
+    const firstInputRef = useRef(null);
 
     const handleWinnerSelect = (playerId) => {
         setSelected((playerId === selected) ? null : playerId);
@@ -57,14 +60,14 @@ export const ResultReportComponent = () => {
 
     const closeModal = () => {
         dispatch({
-            type: actions.CLOSE_MODAL
+            type: actions.ui.CLOSE_MODAL
         });
     };
 
     const updateSettingsAndResults = () => {
         if (isFormValid) {
             dispatch({
-                type: actions.UPDATE_POINTS,
+                type: actions.player.UPDATE_RESULTS,
                 data: {
                     roundResults: formState
                 }
@@ -75,12 +78,19 @@ export const ResultReportComponent = () => {
     }
 
     useEffect(() => {
+        console.log("useEffect runs");
         if (Object.keys(formState).length === gameData.players.length - 1 && selected !== null) {
             setIsFormValid(true);
         } else {
             setIsFormValid(false);
         }
-    }, [formState, selected])
+    }, [formState, gameData, selected]);
+    
+    useEffect(() => {
+        if(isModalOpen) {
+            firstInputRef.current.focus();
+        }
+    },[isModalOpen]);
 
     return (
         <React.Fragment>
@@ -97,6 +107,7 @@ export const ResultReportComponent = () => {
                                 type="number"
                                 variant="filled"
                                 label={playerData.name}
+                                inputRef={key === 0 ? firstInputRef : null}
                                 InputLabelProps={{
                                     shrink: true,
                                 }}
