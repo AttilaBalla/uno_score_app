@@ -15,6 +15,16 @@ const store = configureStore();
 const theme = createMuiTheme({
     palette: {
         type: 'dark',
+        primary: {
+            main : "#e65100",
+        },
+        secondary: {
+            main: "#efebe9",
+        },
+        background: {
+            paper: "#23263a",
+            default: "#0c0f27",
+        },
     },
 });
 
